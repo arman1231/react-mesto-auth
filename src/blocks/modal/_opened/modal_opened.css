@@ -1,0 +1,9 @@
+.modal_opened {
+  /* display: block; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  height: 100%;
+  z-index: 999;
+}

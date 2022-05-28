@@ -1,0 +1,21 @@
+.image-modal__close-btn {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  border: 0;
+  background: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+.image-modal__close-btn:hover {
+  opacity: 0.6;
+
+}
+@media screen and (max-width: 768px) and (min-width: 320px) {
+  .image-modal__close-btn {
+    right: 0px;
+    top: -30px;
+  }
+}

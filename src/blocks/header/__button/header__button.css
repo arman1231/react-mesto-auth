@@ -1,0 +1,11 @@
+.header__button {
+  border: none;
+  background: none;
+  margin-left: 24px;
+  cursor: pointer;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}

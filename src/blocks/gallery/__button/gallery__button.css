@@ -1,0 +1,11 @@
+.gallery__button{
+  border: 0;
+  background: 0;
+  padding: 0;
+  cursor: pointer;
+  background-position-y: 0px;
+  background-repeat: no-repeat;
+}
+.gallery__button:hover {
+  opacity: 0.5;
+}

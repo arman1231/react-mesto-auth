@@ -1,0 +1,8 @@
+.page__gallery {
+  margin-top: 47px;
+}
+@media screen and (max-width: 1279px) and (min-width: 320px) {
+  .page__gallery {
+    margin-top: 37px;
+  }
+}

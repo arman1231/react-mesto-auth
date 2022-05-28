@@ -1,0 +1,31 @@
+.profile__edit-user-image-button {
+  display: flex;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  z-index: 0;
+  /* background: url(/src/images/image.jpg); */
+  background-size: cover;
+  height: 122px;
+  width: 122px;
+  border-radius: 50%;
+}
+
+.profile__edit-user-image-button::before {
+  position: absolute;
+  content: "";
+  background: rgba(0, 0, 0, 0.8) url(/src/images/edit-avatar.svg) no-repeat
+    center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1;
+}
+.profile__edit-user-image-button:hover::before {
+  opacity: 1;
+}

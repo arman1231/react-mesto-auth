@@ -1,0 +1,9 @@
+.profile__edit-btn{
+  border: 0;
+  background: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.profile__edit-btn:hover {
+  opacity: 0.6;
+}

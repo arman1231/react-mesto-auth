@@ -1,0 +1,14 @@
+.page__content {
+  margin: 37px 200px 0 200px;
+  transition: margin 0.3s ease-in;
+}
+@media screen and (max-width: 1279px) and (min-width: 768px) {
+  .page__content {
+    margin: 39px 100px 0 100px;
+  }
+}
+@media screen and (max-width: 618px) and (min-width: 320px) {
+  .page__content {
+    margin: 39px 19px 0 19px;
+  }
+}
