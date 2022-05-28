@@ -56,6 +56,10 @@ body {
   text-align: center;
   cursor: pointer;
   color: #000000;
+  transition: background-color 0.2s ease-in-out;
+}
+.sign__submit:hover {
+  background-color: rgba(255, 255, 255, 0.85);
 }
 .sign__sign-question {
   margin-top: 15px;
@@ -66,6 +70,14 @@ body {
   line-height: 17px;
   text-align: center;
   color: #ffffff;
+}
+.sign__link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.sign__link:hover {
+  color: rgba(255, 255, 255, 0.6);
 }
 @import url(./vendor/normalize.css);
 @import url(./fonts/fonts.css);
