@@ -3,11 +3,17 @@ import { Link, useHistory } from "react-router-dom";
 import * as userAuth from "../utils/userAuth";
 import InfoTooltip from "./InfoTooltip";
 
+import resOk from "../images/resOk.svg"
+import resErr from "../images/resErr.svg"
+
+
 export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = React.useState(false);
+  const [isErrorTooltipOpen, setIsErrorTooltipOpen] = React.useState(false)
+
 
   function handleChangeEmail(e) {
     setEmail(e.target.value);
@@ -20,11 +26,16 @@ export default function Register() {
     userAuth.register(email, password).then((res) => {
       console.log(res);
       if (res) {
-        history.push("/sign-in");
+        setIsSuccessTooltipOpen(true)
+        
       } else {
+        setIsErrorTooltipOpen(true)
         console.log("Что-то пошло не так!");
       }
     });
+  }
+  function handleOnClose() {
+    history.push("/sign-in");
   }
   return (
     <>
@@ -79,7 +90,8 @@ export default function Register() {
           </span>
         </section>
       </div>
-      <InfoTooltip isOpen={isOpen} />
+      <InfoTooltip isOpen={isSuccessTooltipOpen} src={resOk} title={'Вы успешно зарегистрировались!'} onClose={handleOnClose}/>
+      <InfoTooltip isOpen={isErrorTooltipOpen} src={resErr} title={'Что-то пошло не так! Попробуйте ещё раз.'} onClose={() => setIsErrorTooltipOpen(false)}/>
     </>
   );
 }

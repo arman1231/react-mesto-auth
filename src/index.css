@@ -2,7 +2,8 @@ body {
   background-color: black;
 }
 .page_sign {
-  margin: 21px auto;
+  margin: 0 auto;
+  padding-top: 21px;
   width: 358px;
 }
 .sign {
@@ -133,6 +134,8 @@ body {
 @import url(./blocks/modal/__user-data/modal__user-data.css);
 @import url(./blocks/modal/__handlers/modal__handlers.css);
 @import url(./blocks/modal/__input-error/_active/modal__input-error_active.css);
+@import url(./blocks/modal/__tooltip-heading/modal__tooltip-heading.css);
+@import url(./blocks/modal/__tooltip-img/modal__tooltip-img.css);
 @import url(./blocks/image-modal/image-modal.css);
 @import url(./blocks/image-modal/__img/image-modal__img.css);
 @import url(./blocks/image-modal/_opened/image-modal_opened.css);
