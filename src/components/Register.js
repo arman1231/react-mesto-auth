@@ -24,7 +24,6 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
     userAuth.register(email, password).then((res) => {
-      console.log(res);
       if (res) {
         setIsSuccessTooltipOpen(true)
         

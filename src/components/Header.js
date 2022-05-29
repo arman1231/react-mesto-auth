@@ -2,8 +2,9 @@ import React from 'react'
 import logo from "../images/logo.svg";
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Header({loggedIn}) {
+export default function Header({loggedIn, userEmail}) {
   const location = useLocation();
+
   function definePath() {
     let path = '';
     switch (location.pathname) {
@@ -14,7 +15,7 @@ export default function Header({loggedIn}) {
         path = '/sign-in'
         return path;
       default: 
-      path = '/'
+      path = '/sign-in'
       return path;
     }
   }
@@ -32,6 +33,9 @@ export default function Header({loggedIn}) {
       return linkName;
     }
   }
+  function signOut() {
+    localStorage.removeItem('jwt')
+  }
   return (
     <header className="header page__header">
     <img
@@ -40,8 +44,8 @@ export default function Header({loggedIn}) {
       alt="Логотип вебсайта Место"
     />
     <div className='header__handles'>
-      <span className='header__email'>{`email@mail.com`}</span>
-      <Link className='header__button header__button_logged-out' to={definePath}>{defineLinkName()}</Link>
+      <span className='header__email'>{location.pathname !== '/' ? '' : userEmail}</span>
+      <Link onClick={loggedIn ? signOut : null} className='header__button header__button_logged-out' to={definePath}>{defineLinkName()}</Link>
     </div>
   </header>
   )
