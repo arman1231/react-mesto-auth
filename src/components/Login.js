@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import * as userAuth from "../utils/userAuth";
 
-export default function Login({ handleLogin }) {
+export default function Login({ handleLoginSubmit }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
@@ -15,21 +15,29 @@ export default function Login({ handleLogin }) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    userAuth.authorize(email, password).then((data) => {
-      if (data.token) {
-        setEmail('');
-        setPassword('');
-        handleLogin(e);
-        history.push('/');
-      }
-    })
+    handleLoginSubmit(email, password);
+    setEmail("");
+    setPassword("");
+    // userAuth.authorize(email, password).then((data) => {
+    //   if (data.token) {
+    //     setEmail('');
+    //     setPassword('');
+    //     handleLogin(e);
+    //     history.push('/');
+    //   }
+    // }).catch(err => console.log(err))
   }
 
   return (
     <div className="content page__content">
       <section className="sign page_sign">
         <h1 className="sign__caption">Вход</h1>
-        <form className="sign__form" action="#" onSubmit={handleSubmit} noValidate>
+        <form
+          className="sign__form"
+          action="#"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <fieldset className="sign__user-data">
             <input
               className="sign__input"

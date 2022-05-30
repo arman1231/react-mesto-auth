@@ -7,12 +7,12 @@ import resOk from "../images/resOk.svg"
 import resErr from "../images/resErr.svg"
 
 
-export default function Register() {
+export default function Register({handleRegisterSubmit}) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const history = useHistory();
-  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = React.useState(false);
-  const [isErrorTooltipOpen, setIsErrorTooltipOpen] = React.useState(false)
+  // const history = useHistory();
+  // const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = React.useState(false);
+  // const [isErrorTooltipOpen, setIsErrorTooltipOpen] = React.useState(false)
 
 
   function handleChangeEmail(e) {
@@ -23,18 +23,16 @@ export default function Register() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    userAuth.register(email, password).then((res) => {
-      if (res) {
-        setIsSuccessTooltipOpen(true)
-        
-      } else {
-        setIsErrorTooltipOpen(true)
-        console.log("Что-то пошло не так!");
-      }
-    });
-  }
-  function handleOnClose() {
-    history.push("/sign-in");
+    handleRegisterSubmit(email, password);
+    // userAuth.register(email, password).then((res) => {
+    //   if (res) {
+    //     setIsSuccessTooltipOpen(true)
+
+    //   } else {
+    //     setIsErrorTooltipOpen(true)
+    //     console.log("Что-то пошло не так!");
+    //   }
+    // }).catch(err => console.log(err))
   }
   return (
     <>
@@ -89,8 +87,8 @@ export default function Register() {
           </span>
         </section>
       </div>
-      <InfoTooltip isOpen={isSuccessTooltipOpen} src={resOk} title={'Вы успешно зарегистрировались!'} onClose={handleOnClose}/>
-      <InfoTooltip isOpen={isErrorTooltipOpen} src={resErr} title={'Что-то пошло не так! Попробуйте ещё раз.'} onClose={() => setIsErrorTooltipOpen(false)}/>
+      {/* <InfoTooltip isOpen={isSuccessTooltipOpen} src={resOk} title={'Вы успешно зарегистрировались!'} onClose={handleOnClose}/>
+      <InfoTooltip isOpen={isErrorTooltipOpen} src={resErr} title={'Что-то пошло не так! Попробуйте ещё раз.'} onClose={() => setIsErrorTooltipOpen(false)}/> */}
     </>
   );
 }
