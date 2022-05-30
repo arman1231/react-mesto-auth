@@ -65,30 +65,18 @@ function App() {
   }
   function handleLoginSubmit(email, password) {
     userAuth.authorize(email, password).then((data) => {
+      console.log(data);
       if (data.token) {
-        api
-        .getInitialCards()
-        .then((res) => {
-          setCards(res);
-        })
-        .catch((error) => console.log(error));
-
-        api
-        .getUserInfo()
-        .then((res) => {
-          setCurrentUser(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-        checkToken();
         setLoggedIn(true);
         history.push('/');
       }
     }).catch(err => console.log(err));
   }
+  console.log(loggedIn);
+
+  console.log(userEmail);
   React.useEffect(() => {
-      if (localStorage.getItem('jwt')) {
+      if (loggedIn) {
         api
         .getInitialCards()
         .then((res) => {
@@ -104,11 +92,8 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-        checkToken();
-        setLoggedIn(true);
-        history.push('/');
       }
-  }, [])
+  }, [loggedIn])
 
   function handleEscClose(e) {
     if (e.key === "Escape") {
@@ -144,6 +129,11 @@ function App() {
     isEditProfilePopupOpen,
     isImagePopupOpen,
   ]);
+  React.useEffect(() => {
+    if (loggedIn) {
+      checkToken();
+    }
+  }, [loggedIn])
   // React.useEffect(() => {
   //   api
   //     .getInitialCards()
