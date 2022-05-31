@@ -2,7 +2,6 @@ import React from "react";
 import {
   Route,
   Switch,
-  useParams,
   useHistory,
   Redirect,
 } from "react-router-dom";
@@ -25,6 +24,7 @@ import resOk from "../images/resOk.svg";
 import resErr from "../images/resErr.svg";
 
 function App() {
+  const history = useHistory();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -49,9 +49,6 @@ function App() {
     history.push("/sign-in");
   }
 
-
-  const history = useHistory();
-
   function handleRegisterSubmit(email, password) {
     userAuth.register(email, password).then((res) => {
       if (res) {
@@ -65,16 +62,16 @@ function App() {
   }
   function handleLoginSubmit(email, password) {
     userAuth.authorize(email, password).then((data) => {
-      console.log(data);
       if (data.token) {
+        setUserEmail(email);
         setLoggedIn(true);
         history.push('/');
       }
     }).catch(err => console.log(err));
   }
-  console.log(loggedIn);
-
-  console.log(userEmail);
+  React.useEffect(() => {
+      checkToken();
+  }, [])
   React.useEffect(() => {
       if (loggedIn) {
         api
@@ -129,30 +126,6 @@ function App() {
     isEditProfilePopupOpen,
     isImagePopupOpen,
   ]);
-  React.useEffect(() => {
-    if (loggedIn) {
-      checkToken();
-    }
-  }, [loggedIn])
-  // React.useEffect(() => {
-  //   api
-  //     .getInitialCards()
-  //     .then((res) => {
-  //       setCards(res);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
-  // React.useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((res) => {
-  //       setCurrentUser(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -221,13 +194,13 @@ function App() {
       })
       .then((res) => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
-        closeAllPopups();
       });
   }
   function handleUpdateAvatar(link) {
@@ -236,13 +209,13 @@ function App() {
       .updateAvatar(link)
       .then((res) => {
         setCurrentUser(res);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
-        closeAllPopups();
       });
   }
   function handleAddPlaceSubmit(name, link) {
@@ -251,13 +224,13 @@ function App() {
       .addNewCard({ name, link })
       .then((res) => {
         setCards([res, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
-        closeAllPopups();
       });
   }
 
