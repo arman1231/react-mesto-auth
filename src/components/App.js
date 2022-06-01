@@ -40,22 +40,21 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
+  const [stateSuccess, setStateSuccess] = React.useState(null)
+  const [isTooltipOpen, setIsTooltipOpen] = React.useState(false)
 
-
-  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = React.useState(false);
-  const [isErrorTooltipOpen, setIsErrorTooltipOpen] = React.useState(false);
   function handleOnTooltipClose() {
-    setIsSuccessTooltipOpen(false);
+    setIsTooltipOpen(false);
     history.push("/sign-in");
   }
-
   function handleRegisterSubmit(email, password) {
     userAuth.register(email, password).then((res) => {
       if (res) {
-        setIsSuccessTooltipOpen(true)
-
+        setIsTooltipOpen(true)
+        setStateSuccess(true)
       } else {
-        setIsErrorTooltipOpen(true)
+        setIsTooltipOpen(true)
+        setStateSuccess(false)
         console.log("Что-то пошло не так!");
       }
     }).catch(err => console.log(err))
@@ -286,16 +285,10 @@ function App() {
           />
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
           <InfoTooltip
-            isOpen={isSuccessTooltipOpen}
-            src={resOk}
-            title={"Вы успешно зарегистрировались!"}
-            onClose={handleOnTooltipClose}
-          />
-          <InfoTooltip
-            isOpen={isErrorTooltipOpen}
-            src={resErr}
-            title={"Что-то пошло не так! Попробуйте ещё раз."}
-            onClose={() => setIsErrorTooltipOpen(false)}
+            isOpen={isTooltipOpen}
+            src={stateSuccess ? resOk : resErr}
+            title={stateSuccess ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}
+            onClose={stateSuccess ? handleOnTooltipClose : () => setIsTooltipOpen(false)}
           />
         </CurrentUserContext.Provider>
       </div>
