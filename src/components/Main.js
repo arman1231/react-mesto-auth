@@ -3,10 +3,11 @@ import pencilSvg from "../images/pencil.svg";
 import crossSvg from "../images/cross.svg";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext"
+import Loader from "./Loader";
 
-export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) {
+export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete, isLoading}) {
   const currentUser = React.useContext(CurrentUserContext);
-
+  console.log(isLoading);
   return (
     <main className="content page__content">
       <section className="profile">
@@ -48,11 +49,22 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
         </button>
       </section>
       <section className="gallery page__gallery">
-        {cards.map((card) => {
+        {isLoading ? [... new Array(6)].map((_, i) => {
+          return (
+          <Loader key={i} />
+          )
+        }) : cards.map((card) => {
           return (
             <Card card={card} onCardLike={onCardLike} onCardDelete={onCardDelete} onCardClick={onCardClick} key={card._id}/>
           );
         })}
+        {/* {
+        !cards ? <Loader /> :
+        cards.map((card) => {
+          return (
+            <Card card={card} onCardLike={onCardLike} onCardDelete={onCardDelete} onCardClick={onCardClick} key={card._id}/>
+          );
+        })} */}
       </section>
     </main>
   );

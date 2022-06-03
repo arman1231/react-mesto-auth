@@ -73,12 +73,16 @@ function App() {
   }, [])
   React.useEffect(() => {
       if (loggedIn) {
+        setIsLoading(true);
         api
         .getInitialCards()
         .then((res) => {
           setCards(res);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setIsLoading(false)
+        });
 
         api
         .getUserInfo()
@@ -256,6 +260,7 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
               cards={cards}
+              isLoading={isLoading}
             />
           </Switch>
           {loggedIn && <Footer />}
