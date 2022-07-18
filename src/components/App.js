@@ -106,7 +106,7 @@ function App() {
       if (jwt) {
         userAuth.getContent(jwt).then((res) => {
           if (res) {
-            setUserEmail(res.data.email);
+            setUserEmail(res.email);
             setLoggedIn(true);
             history.push("/");
           }
@@ -131,7 +131,7 @@ function App() {
   ]);
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
@@ -300,5 +300,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
