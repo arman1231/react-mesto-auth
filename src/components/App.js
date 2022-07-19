@@ -243,6 +243,9 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Header loggedIn={loggedIn} userEmail={userEmail} />
           <Switch>
+            <Route path="/crash-test">
+              <span>SERVER WILL FALL NOW</span>
+            </Route>
             <Route path="/sign-in">
               <Login handleLoginSubmit={handleLoginSubmit} />
             </Route>

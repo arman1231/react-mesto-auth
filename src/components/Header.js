@@ -8,14 +8,17 @@ export default function Header({loggedIn, userEmail}) {
   function definePath() {
     let path = '';
     switch (location.pathname) {
+      case('/crash-test'):
+        path = '/crash-test';
+        return path;
       case ('/sign-in'):
-        path = '/sign-up'
+        path = '/sign-up';
         return path;
       case ('/sign-up'):
-        path = '/sign-in'
+        path = '/sign-in';
         return path;
       default: 
-      path = '/sign-in'
+      path = '/sign-in';
       return path;
     }
   }
