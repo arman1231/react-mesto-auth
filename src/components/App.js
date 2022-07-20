@@ -61,15 +61,16 @@ function App() {
   }
   function handleLoginSubmit(email, password) {
     userAuth.authorize(email, password).then((data) => {
-      if (data.token) {
-        setUserEmail(email);
-        setLoggedIn(true);
-        history.push('/');
-      } else {
+      if (!data) {
         setIsTooltipOpen(true)
         setStateSuccess(false)
         console.log("Что-то пошло не так!");
       }
+      if (data.token) {
+        setUserEmail(email);
+        setLoggedIn(true);
+        history.push('/');
+      } 
     }).catch(err => console.log(err));
   }
   React.useEffect(() => {
