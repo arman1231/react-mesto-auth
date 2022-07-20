@@ -65,6 +65,10 @@ function App() {
         setUserEmail(email);
         setLoggedIn(true);
         history.push('/');
+      } else {
+        setIsTooltipOpen(true)
+        setStateSuccess(false)
+        console.log("Что-то пошло не так!");
       }
     }).catch(err => console.log(err));
   }
